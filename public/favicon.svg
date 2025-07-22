@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+  <!-- Basketball circle -->
+  <circle cx="50" cy="50" r="45" fill="#F97316" stroke="#EA580C" stroke-width="2"/>
+  
+  <!-- Basketball lines -->
+  <!-- Vertical line -->
+  <path d="M 50 5 Q 50 50 50 95" stroke="#EA580C" stroke-width="2" fill="none"/>
+  
+  <!-- Horizontal line -->
+  <path d="M 5 50 Q 50 50 95 50" stroke="#EA580C" stroke-width="2" fill="none"/>
+  
+  <!-- Curved lines -->
+  <path d="M 25 5 Q 50 25 75 5" stroke="#EA580C" stroke-width="1.5" fill="none"/>
+  <path d="M 25 95 Q 50 75 75 95" stroke="#EA580C" stroke-width="1.5" fill="none"/>
+  <path d="M 5 25 Q 25 50 5 75" stroke="#EA580C" stroke-width="1.5" fill="none"/>
+  <path d="M 95 25 Q 75 50 95 75" stroke="#EA580C" stroke-width="1.5" fill="none"/>
+</svg>
