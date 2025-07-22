@@ -238,12 +238,40 @@ export default function Home() {
       <footer className="bg-gray-800 text-white mt-16">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="text-center">
-            <p className="text-gray-400">
-              🏀 Serbest Atış Projesi - Stacks Blockchain üzerinde basketbol oyunu
+            <h2 className="text-xl font-bold mb-4">🏀 Serbest Atış Projesi</h2>
+            <p className="text-gray-400 mb-4">
+              Blockchain üzerinde basketbol serbest atış tahmin oyunu
             </p>
-            <p className="text-sm text-gray-500 mt-2">
-              Clarity Smart Contracts & Next.js ile geliştirilmiştir
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+              <div>
+                <h3 className="font-bold mb-2">Oyun Hakkında</h3>
+                <p className="text-sm text-gray-400">
+                  Stacks blockchain teknolojisi kullanılarak geliştirilmiş basketbol tahmin oyunu. 
+                  3 serbest atış tahmini yapın, gerçek atışları simüle edin ve STX token kazanın!
+                </p>
+              </div>
+              <div>
+                <h3 className="font-bold mb-2">Teknolojiler</h3>
+                <ul className="text-sm text-gray-400 space-y-1">
+                  <li>• Clarity Smart Contracts</li>
+                  <li>• Next.js & TypeScript</li>
+                  <li>• Stacks Blockchain</li>
+                  <li>• Tailwind CSS</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-bold mb-2">Anahtar Kelimeler</h3>
+                <p className="text-sm text-gray-400">
+                  blockchain oyun, basketbol tahmin, serbest atış, cryptocurrency oyun, 
+                  web3 basketball, stacks blockchain, bitcoin oyun, crypto gaming
+                </p>
+              </div>
+            </div>
+            <div className="border-t border-gray-700 mt-8 pt-4">
+              <p className="text-sm text-gray-500">
+                Clarity Smart Contracts & Next.js ile geliştirilmiştir
+              </p>
+            </div>
           </div>
         </div>
       </footer>
