@@ -247,6 +247,11 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Developer Credit - Fixed Bottom Right */}
+      <div className="fixed bottom-4 right-4 bg-black bg-opacity-70 text-white px-3 py-2 rounded-lg text-xs shadow-lg backdrop-blur-sm">
+        Bu site Çağıl Emek Kurtul tarafından yapılmıştır.
+      </div>
     </div>
   );
 }

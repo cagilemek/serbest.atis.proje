@@ -38,7 +38,7 @@ export default function ShotPanel({
   return (
     <div className="bg-white rounded-lg p-6 shadow-lg border border-orange-200">
       <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
-        🏀 Atışlarınızı Yapın
+        🏀 2. ADIM: Gerçek Atışlarınızı Yapın
       </h3>
       
       {/* Basketball Court Visualization */}
@@ -63,21 +63,17 @@ export default function ShotPanel({
 
       {/* Shot Buttons */}
       {currentShotIndex < 3 && (
-        <div className="flex space-x-4 justify-center mb-6">
+        <div className="flex justify-center mb-6">
           <button
-            onClick={() => handleShot(true)}
+            onClick={() => {
+              // Rastgele sonuç belirle (gerçek atış simülasyonu)
+              const isSuccessful = Math.random() > 0.5;
+              handleShot(isSuccessful);
+            }}
             disabled={disabled || showAnimation}
-            className="px-8 py-4 bg-green-500 text-white rounded-lg font-bold text-lg hover:bg-green-600 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            className="px-12 py-6 bg-orange-500 text-white rounded-lg font-bold text-xl hover:bg-orange-600 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
-            🎯 Basket!
-          </button>
-          
-          <button
-            onClick={() => handleShot(false)}
-            disabled={disabled || showAnimation}
-            className="px-8 py-4 bg-red-500 text-white rounded-lg font-bold text-lg hover:bg-red-600 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-          >
-            ❌ Kaçtı!
+            🏀 Atış Yap
           </button>
         </div>
       )}
