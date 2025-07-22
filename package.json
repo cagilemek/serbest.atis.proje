@@ -10,7 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "next build"
   },
   "author": "",
   "license": "ISC",
@@ -40,5 +41,8 @@
   "devDependencies": {
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
