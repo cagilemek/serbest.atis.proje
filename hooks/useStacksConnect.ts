@@ -25,6 +25,9 @@ import {
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
 
+// Demo mode - set to true for testing without deployed contract
+const DEMO_MODE = true;
+
 export interface GameState {
   predictions: boolean[];
   shots: boolean[];
@@ -38,9 +41,18 @@ export function useStacksConnect() {
   const [isLoading, setIsLoading] = useState(false);
   const [gameState, setGameState] = useState<GameState | null>(null);
 
-  const network = new StacksTestnet(); // Change to StacksMainnet for production
-  const contractAddress = 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM'; // Update with your deployed contract address
+  const network = new StacksTestnet();
+  const contractAddress = 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM';
   const contractName = 'basketball-game';
+
+  // Demo game state for testing
+  const [demoGameState, setDemoGameState] = useState<GameState>({
+    predictions: [],
+    shots: [],
+    completed: false,
+    predictionsMatched: false,
+    balance: 0,
+  });
 
   useEffect(() => {
     if (userSession.isSignInPending()) {
@@ -70,12 +82,43 @@ export function useStacksConnect() {
     userSession.signUserOut('/');
     setUserData(null);
     setGameState(null);
+    setDemoGameState({
+      predictions: [],
+      shots: [],
+      completed: false,
+      predictionsMatched: false,
+      balance: 0,
+    });
   };
 
   const startGame = async (predictions: boolean[]) => {
     if (!userData) return;
 
     setIsLoading(true);
+    
+    if (DEMO_MODE) {
+      // Demo mode - simulate blockchain interaction
+      setTimeout(() => {
+        setDemoGameState({
+          predictions,
+          shots: [],
+          completed: false,
+          predictionsMatched: false,
+          balance: demoGameState.balance,
+        });
+        setGameState({
+          predictions,
+          shots: [],
+          completed: false,
+          predictionsMatched: false,
+          balance: demoGameState.balance,
+        });
+        setIsLoading(false);
+        console.log('Demo: Game started with predictions:', predictions);
+      }, 1000);
+      return;
+    }
+
     try {
       const functionArgs = [
         listCV(predictions.map(p => boolCV(p)))
@@ -105,6 +148,34 @@ export function useStacksConnect() {
     if (!userData) return;
 
     setIsLoading(true);
+    
+    if (DEMO_MODE) {
+      // Demo mode - simulate blockchain interaction
+      setTimeout(() => {
+        const predictionsMatch = JSON.stringify(demoGameState.predictions) === JSON.stringify(shots);
+        const newBalance = predictionsMatch ? demoGameState.balance + 1000000 : demoGameState.balance;
+        
+        const newGameState = {
+          predictions: demoGameState.predictions,
+          shots,
+          completed: true,
+          predictionsMatched: predictionsMatch,
+          balance: newBalance,
+        };
+        
+        setDemoGameState(newGameState);
+        setGameState(newGameState);
+        setIsLoading(false);
+        
+        if (predictionsMatch) {
+          console.log('Demo: Perfect predictions! You earned 1 STX token!');
+        } else {
+          console.log('Demo: Game completed, but predictions didn\'t match.');
+        }
+      }, 1000);
+      return;
+    }
+
     try {
       const functionArgs = [
         listCV(shots.map(s => boolCV(s)))
@@ -134,6 +205,30 @@ export function useStacksConnect() {
     if (!userData) return;
 
     setIsLoading(true);
+    
+    if (DEMO_MODE) {
+      // Demo mode - reset game state
+      setTimeout(() => {
+        setDemoGameState({
+          predictions: [],
+          shots: [],
+          completed: false,
+          predictionsMatched: false,
+          balance: demoGameState.balance,
+        });
+        setGameState({
+          predictions: [],
+          shots: [],
+          completed: false,
+          predictionsMatched: false,
+          balance: demoGameState.balance,
+        });
+        setIsLoading(false);
+        console.log('Demo: Game reset!');
+      }, 500);
+      return;
+    }
+
     try {
       await openContractCall({
         network,
@@ -157,6 +252,12 @@ export function useStacksConnect() {
 
   const fetchGameState = async () => {
     if (!userData) return;
+
+    if (DEMO_MODE) {
+      // Demo mode - use local state
+      setGameState(demoGameState);
+      return;
+    }
 
     try {
       const result = await callReadOnlyFunction({
@@ -186,9 +287,13 @@ export function useStacksConnect() {
 
   useEffect(() => {
     if (userData) {
-      fetchGameState();
+      if (DEMO_MODE) {
+        setGameState(demoGameState);
+      } else {
+        fetchGameState();
+      }
     }
-  }, [userData]);
+  }, [userData, demoGameState]);
 
   return {
     userData,
