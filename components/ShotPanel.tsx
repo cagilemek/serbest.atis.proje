@@ -66,8 +66,19 @@ export default function ShotPanel({
         <div className="flex justify-center mb-6">
           <button
             onClick={() => {
-              // Rastgele sonuç belirle (gerçek atış simülasyonu)
-              const isSuccessful = Math.random() > 0.5;
+              // Akıllı atış sistemi - kullanıcının tahminine %70 uyum
+              const userPrediction = predictions[currentShotIndex];
+              let isSuccessful;
+              
+              if (userPrediction !== undefined) {
+                // %70 ihtimalle kullanıcının tahmini doğru çıkar
+                const shouldMatchPrediction = Math.random() < 0.7;
+                isSuccessful = shouldMatchPrediction ? userPrediction : !userPrediction;
+              } else {
+                // Tahmin yoksa %60 başarı şansı
+                isSuccessful = Math.random() < 0.6;
+              }
+              
               handleShot(isSuccessful);
             }}
             disabled={disabled || showAnimation}
