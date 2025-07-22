@@ -1,12 +1,12 @@
 [project]
-name = "hello-world"
-description = "A beginner smart contract with examples of commonly used Clarity expressions and data structures"
+name = "serbest-atis-proje"
+description = "A basketball free throw prediction game on Stacks blockchain where players predict their shots and earn tokens for correct predictions"
 authors = []
 telemetry = true
 cache_dir = './.cache'
 
-[contracts.hello-world]
-path = "contracts/hello-world.clar"
+[contracts.basketball-game]
+path = "contracts/basketball-game.clar"
 clarity_version = 3
 epoch = 3.0
 

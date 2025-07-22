@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.basketball-court {
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+}
+
+.basketball {
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+}
+
+.shot-animation {
+  animation: shot-arc 1s ease-in-out;
+}
+
+@keyframes shot-arc {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-100px) scale(0.8); }
+  100% { transform: translateY(0) scale(1); }
+}
