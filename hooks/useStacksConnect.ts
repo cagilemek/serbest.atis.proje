@@ -134,7 +134,7 @@ export function useStacksConnect() {
         contractName,
         functionName: 'start-game',
         functionArgs,
-        postConditionMode: PostConditionMode.Deny,
+        postConditionMode: PostConditionMode.Allow,
         postConditions: [
           makeStandardSTXPostCondition(
             userAddress,
