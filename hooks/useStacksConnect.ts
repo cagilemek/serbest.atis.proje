@@ -25,8 +25,8 @@ import {
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
 
-// Demo mode - set to true for testing without deployed contract
-const DEMO_MODE = true;
+// Demo mode - set to false for real testnet deployment
+const DEMO_MODE = false;
 
 export interface GameState {
   predictions: boolean[];
