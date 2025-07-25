@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://serbest-atis-proje-o8fm.vercel.app/sitemap.xml',
+    sitemap: 'https://free-throw-project.vercel.app/sitemap.xml',
   }
 }

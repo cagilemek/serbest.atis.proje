@@ -67,7 +67,7 @@ export function useStacksConnect() {
   const connectWallet = () => {
     showConnect({
       appDetails: {
-        name: 'Serbest Atış Projesi',
+        name: 'Free Throw Project',
         icon: '/basketball-icon.png',
       },
       redirectTo: '/',

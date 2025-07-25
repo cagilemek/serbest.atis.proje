@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://serbest-atis-proje-o8fm.vercel.app',
+      url: 'https://free-throw-project.vercel.app',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,

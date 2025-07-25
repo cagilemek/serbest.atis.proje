@@ -16,17 +16,17 @@ export default function PredictionPanel({
   return (
     <div className="bg-white rounded-lg p-6 shadow-lg border border-orange-200">
       <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
-        🎯 1. ADIM: Tahminlerinizi Yapın
+        🎯 STEP 1: Make Your Predictions
       </h3>
       <p className="text-sm text-gray-600 mb-4 text-center">
-        Atış yapmadan önce, hangi atışların başarılı olacağını tahmin edin
+        Before shooting, predict which shots will be successful
       </p>
       
       <div className="space-y-4">
         {[1, 2, 3].map((shotNumber, index) => (
           <div key={shotNumber} className="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
             <span className="font-medium text-gray-700">
-              {shotNumber}. Atış
+              Shot {shotNumber}
             </span>
             
             <div className="flex space-x-2">
@@ -39,7 +39,7 @@ export default function PredictionPanel({
                     : 'bg-gray-200 text-gray-700 hover:bg-green-100'
                 } ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
               >
-                ✅ Girer
+                ✅ Make
               </button>
               
               <button
@@ -51,7 +51,7 @@ export default function PredictionPanel({
                     : 'bg-gray-200 text-gray-700 hover:bg-red-100'
                 } ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
               >
-                ❌ Girmez
+                ❌ Miss
               </button>
             </div>
           </div>
@@ -60,7 +60,7 @@ export default function PredictionPanel({
       
       <div className="mt-4 p-3 bg-blue-50 rounded-lg">
         <p className="text-xs text-blue-700 text-center">
-          💡 İpucu: Tahminleriniz atışlarınızla tam olarak eşleşirse token kazanırsınız!
+          💡 Tip: You earn tokens if your predictions exactly match your shots!
         </p>
       </div>
     </div>

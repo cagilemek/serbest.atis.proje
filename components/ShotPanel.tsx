@@ -38,7 +38,7 @@ export default function ShotPanel({
   return (
     <div className="bg-white rounded-lg p-6 shadow-lg border border-orange-200">
       <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
-        🏀 2. ADIM: Gerçek Atışlarınızı Yapın
+        🏀 STEP 2: Take Your Actual Shots
       </h3>
       
       {/* Basketball Court Visualization */}
@@ -50,12 +50,12 @@ export default function ShotPanel({
       <div className="mb-4 p-3 bg-orange-50 rounded-lg">
         <div className="flex justify-between items-center">
           <span className="font-medium text-gray-700">
-            Mevcut Atış: {currentShotIndex + 1}/3
+            Current Shot: {currentShotIndex + 1}/3
           </span>
           <span className="text-sm text-gray-600">
-            Tahmininiz: {predictions[currentShotIndex] !== undefined 
-              ? (predictions[currentShotIndex] ? '✅ Girer' : '❌ Girmez')
-              : 'Tahmin yok'
+            Your Prediction: {predictions[currentShotIndex] !== undefined 
+              ? (predictions[currentShotIndex] ? '✅ Make' : '❌ Miss')
+              : 'No prediction'
             }
           </span>
         </div>
@@ -66,16 +66,16 @@ export default function ShotPanel({
         <div className="flex justify-center mb-6">
           <button
             onClick={() => {
-              // Akıllı atış sistemi - kullanıcının tahminine %75 uyum
+              // Smart shooting system - 75% alignment with user's prediction
               const userPrediction = predictions[currentShotIndex];
               let isSuccessful;
               
               if (userPrediction !== undefined) {
-                // %75 ihtimalle kullanıcının tahmini doğru çıkar
+                // 75% chance the user's prediction is correct
                 const shouldMatchPrediction = Math.random() < 0.75;
                 isSuccessful = shouldMatchPrediction ? userPrediction : !userPrediction;
               } else {
-                // Tahmin yoksa %60 başarı şansı
+                // 60% success rate if no prediction
                 isSuccessful = Math.random() < 0.6;
               }
               
@@ -84,30 +84,30 @@ export default function ShotPanel({
             disabled={disabled || showAnimation}
             className="px-12 py-6 bg-orange-500 text-white rounded-lg font-bold text-xl hover:bg-orange-600 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
-            🏀 Atış Yap
+            🏀 Take Shot
           </button>
         </div>
       )}
 
       {/* Shot Results */}
       <div className="space-y-2">
-        <h4 className="font-medium text-gray-700 mb-2">Atış Sonuçları:</h4>
+        <h4 className="font-medium text-gray-700 mb-2">Shot Results:</h4>
         {[1, 2, 3].map((shotNumber, index) => (
           <div key={shotNumber} className="flex items-center justify-between p-2 bg-gray-50 rounded">
             <span className="text-sm text-gray-600">
-              {shotNumber}. Atış
+              Shot {shotNumber}
             </span>
             
             <div className="flex items-center space-x-4">
               <span className="text-sm">
-                Tahmin: {predictions[index] !== undefined 
+                Prediction: {predictions[index] !== undefined 
                   ? (predictions[index] ? '✅' : '❌')
                   : '⏳'
                 }
               </span>
               
               <span className="text-sm">
-                Sonuç: {shots[index] !== undefined 
+                Result: {shots[index] !== undefined 
                   ? (shots[index] ? '🎯' : '💥')
                   : (index === currentShotIndex && showAnimation ? '🏀' : '⏳')
                 }
@@ -115,7 +115,7 @@ export default function ShotPanel({
               
               <span className="text-sm font-medium">
                 {shots[index] !== undefined && predictions[index] !== undefined
-                  ? (shots[index] === predictions[index] ? '✅ Doğru' : '❌ Yanlış')
+                  ? (shots[index] === predictions[index] ? '✅ Correct' : '❌ Wrong')
                   : ''
                 }
               </span>

@@ -4,28 +4,28 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: '🏀 Serbest Atış Projesi - Blockchain Basketbol Tahmin Oyunu',
-  description: 'Blockchain üzerinde basketbol serbest atış tahmin oyunu. 3 atış tahmini yap, gerçek atışları simüle et, STX token kazan! Stacks blockchain, Next.js ve modern web teknolojileri ile geliştirilmiş ücretsiz oyun.',
+  title: '🏀 Free Throw Project - Blockchain Basketball Prediction Game',
+  description: 'Basketball free throw prediction game on blockchain. Make 3 shot predictions, simulate actual shots, earn STX tokens! Free game developed with Stacks blockchain, Next.js and modern web technologies.',
   keywords: [
-    'basketbol oyunu',
-    'blockchain oyun',
-    'serbest atış',
-    'tahmin oyunu',
+    'basketball game',
+    'blockchain game',
+    'free throw',
+    'prediction game',
     'stacks blockchain',
-    'cryptocurrency oyun',
-    'web3 oyun',
-    'bitcoin oyun',
-    'basketbol tahmin',
-    'crypto oyun',
+    'cryptocurrency game',
+    'web3 game',
+    'bitcoin game',
+    'basketball prediction',
+    'crypto game',
     'blockchain game',
     'basketball prediction',
     'free throw game',
     'stx token',
-    'çevrimiçi basketbol oyunu',
-    'blockchain tabanlı oyun',
-    'cryptocurrency kazanma',
+    'online basketball game',
+    'blockchain based game',
+    'cryptocurrency earning',
     'web3 basketball',
-    'türkçe blockchain oyunu'
+    'english blockchain game'
   ],
   authors: [{ name: 'Çağıl Emek Kurtul', url: 'https://github.com/cagilemek' }],
   creator: 'Çağıl Emek Kurtul',
@@ -40,24 +40,24 @@ export const metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'tr_TR',
-    url: 'https://serbest-atis-proje-o8fm.vercel.app/',
-    title: '🏀 Serbest Atış Projesi - Blockchain Basketbol Tahmin Oyunu',
-    description: 'Blockchain üzerinde basketbol serbest atış tahmin oyunu. 3 atış tahmini yap, gerçek atışları simüle et, STX token kazan!',
-    siteName: 'Serbest Atış Projesi',
+    locale: 'en_US',
+    url: 'https://free-throw-project.vercel.app/',
+    title: '🏀 Free Throw Project - Blockchain Basketball Prediction Game',
+    description: 'Basketball free throw prediction game on blockchain. Make 3 shot predictions, simulate actual shots, earn STX tokens!',
+    siteName: 'Free Throw Project',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Serbest Atış Projesi - Blockchain Basketbol Oyunu',
+        alt: 'Free Throw Project - Blockchain Basketball Game',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '🏀 Serbest Atış Projesi - Blockchain Basketbol Tahmin Oyunu',
-    description: 'Blockchain üzerinde basketbol serbest atış tahmin oyunu. 3 atış tahmini yap, gerçek atışları simüle et, STX token kazan!',
+    title: '🏀 Free Throw Project - Blockchain Basketball Prediction Game',
+    description: 'Basketball free throw prediction game on blockchain. Make 3 shot predictions, simulate actual shots, earn STX tokens!',
     images: ['/og-image.png'],
     creator: '@cagilemek',
   },
@@ -92,14 +92,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="tr">
+    <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#F97316" />
-        <meta name="application-name" content="Serbest Atış Projesi" />
+        <meta name="application-name" content="Free Throw Project" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Serbest Atış Projesi" />
+        <meta name="apple-mobile-web-app-title" content="Free Throw Project" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#F97316" />
@@ -112,9 +112,9 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Game",
-              "name": "Serbest Atış Projesi",
-              "description": "Blockchain üzerinde basketbol serbest atış tahmin oyunu",
-              "url": "https://serbest-atis-proje-o8fm.vercel.app/",
+              "name": "Free Throw Project",
+              "description": "Basketball free throw prediction game on blockchain",
+              "url": "https://free-throw-project.vercel.app/",
               "author": {
                 "@type": "Person",
                 "name": "Çağıl Emek Kurtul"
@@ -134,7 +134,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
-        <link rel="canonical" href="https://serbest-atis-proje-o8fm.vercel.app/" />
+        <link rel="canonical" href="https://free-throw-project.vercel.app/" />
       </head>
       <body className={inter.className}>
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">

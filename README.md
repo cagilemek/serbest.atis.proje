@@ -1,74 +1,74 @@
-# 🏀 Serbest Atış Projesi
+# 🏀 Free Throw Project
 
-Stacks blockchain üzerinde geliştirilen basketbol serbest atış tahmin oyunu. Oyuncular 3 atış için tahminlerini yapar, gerçek atışları gerçekleştirir ve tahminleri doğruysa STX token kazanır!
+Basketball free throw prediction game developed on the Stacks blockchain. Players make predictions for 3 shots, perform actual shots, and earn STX tokens if their predictions are correct!
 
-## 🎯 Oyun Nasıl Çalışır
+## 🎯 How the Game Works
 
-1. **Tahmin Aşaması**: 3 serbest atış için tahminlerinizi yapın (girer/girmez)
-2. **Atış Aşaması**: Gerçek atışlarınızı simüle edin
-3. **Ödül Aşaması**: Tahminleriniz atışlarınızla tam eşleşirse 1 STX token kazanın!
+1. **Prediction Phase**: Make your predictions for 3 free throws (make/miss)
+2. **Shooting Phase**: Simulate your actual shots
+3. **Reward Phase**: Earn 1 STX token if your predictions perfectly match your shots!
 
-## 🛠️ Teknoloji Stack
+## 🛠️ Technology Stack
 
 ### Blockchain
-- **Clarity Smart Contracts**: Oyun mantığı ve token yönetimi
-- **Stacks Blockchain**: Bitcoin güvenliği ile akıllı sözleşme platformu
-- **STX Token**: Ödül sistemi için native token
+- **Clarity Smart Contracts**: Game logic and token management
+- **Stacks Blockchain**: Smart contract platform with Bitcoin security
+- **STX Token**: Native token for reward system
 
 ### Frontend
-- **Next.js 14**: React tabanlı modern web framework
-- **TypeScript**: Tip güvenliği
-- **Tailwind CSS**: Modern ve responsive UI
-- **Stacks.js**: Blockchain entegrasyonu
+- **Next.js 14**: Modern React-based web framework
+- **TypeScript**: Type safety
+- **Tailwind CSS**: Modern and responsive UI
+- **Stacks.js**: Blockchain integration
 
-### Geliştirme Araçları
-- **Clarinet**: Smart contract geliştirme ve test ortamı
-- **Vitest**: Test framework
-- **ESLint & Prettier**: Kod kalitesi
+### Development Tools
+- **Clarinet**: Smart contract development and testing environment
+- **Vitest**: Testing framework
+- **ESLint & Prettier**: Code quality
 
-## 🚀 Kurulum ve Çalıştırma
+## 🚀 Installation and Setup
 
-### Gereksinimler
+### Requirements
 - Node.js 18+
-- npm veya yarn
+- npm or yarn
 - Clarinet CLI
-- Hiro Wallet veya Xverse Wallet
+- Hiro Wallet or Xverse Wallet
 
-### Kurulum
+### Installation
 ```bash
-# Projeyi klonlayın
-git clone <proje-url>
-cd serbest-atis-proje
+# Clone the project
+git clone <project-url>
+cd free-throw-project
 
-# Dependencies'leri yükleyin
+# Install dependencies
 npm install
 
-# Smart contract testlerini çalıştırın
+# Run smart contract tests
 npm test
 
-# Development server'ı başlatın
+# Start development server
 npm run dev
 ```
 
 ### Production Build
 ```bash
-# Production build oluşturun
+# Create production build
 npm run build
 
-# Production server'ı başlatın
+# Start production server
 npm start
 ```
 
 ## 🔧 Smart Contract
 
-### Ana Fonksiyonlar
+### Main Functions
 
-- `start-game(predictions)`: Yeni oyun başlatır
-- `take-shots(shots)`: Atışları gerçekleştirir
-- `reset-game()`: Oyunu sıfırlar
-- `get-game-stats(player)`: Oyuncu istatistiklerini getirir
+- `start-game(predictions)`: Starts a new game
+- `take-shots(shots)`: Performs the shots
+- `reset-game()`: Resets the game
+- `get-game-stats(player)`: Gets player statistics
 
-### Veri Yapıları
+### Data Structures
 
 ```clarity
 {
@@ -79,30 +79,30 @@ npm start
 }
 ```
 
-## 🎮 Kullanım
+## 🎮 Usage
 
-1. **Cüzdan Bağlantısı**: Hiro Wallet veya Xverse ile bağlanın
-2. **Tahmin Yapma**: Her atış için "Girer" veya "Girmez" seçin
-3. **Oyun Başlatma**: Tahminlerinizi blockchain'e gönderin
-4. **Atış Yapma**: Sırayla 3 atışınızı gerçekleştirin
-5. **Sonuç**: Tahminler doğruysa otomatik olarak token kazanın
+1. **Wallet Connection**: Connect with Hiro Wallet or Xverse
+2. **Making Predictions**: Choose "Make" or "Miss" for each shot
+3. **Starting Game**: Send your predictions to the blockchain
+4. **Taking Shots**: Perform your 3 shots sequentially
+5. **Results**: Automatically earn tokens if predictions are correct
 
-## 📱 Özellikler
+## 📱 Features
 
-- ✅ Responsive tasarım (mobil uyumlu)
-- ✅ Real-time blockchain entegrasyonu
-- ✅ Animasyonlu basketbol sahası
-- ✅ Detaylı istatistik takibi
-- ✅ Güvenli cüzdan bağlantısı
-- ✅ Türkçe arayüz
+- ✅ Responsive design (mobile-friendly)
+- ✅ Real-time blockchain integration
+- ✅ Animated basketball court
+- ✅ Detailed statistics tracking
+- ✅ Secure wallet connection
+- ✅ English interface
 
-## 🧪 Test
+## 🧪 Testing
 
 ```bash
-# Smart contract testleri
+# Smart contract tests
 npm test
 
-# Test raporları
+# Test reports
 npm run test:reports
 
 # Watch mode
@@ -123,47 +123,47 @@ clarinet deployments generate --mainnet
 clarinet deployments apply --mainnet
 ```
 
-## 🔐 Güvenlik
+## 🔐 Security
 
-- ✅ Post-condition'lar ile güvenli işlemler
-- ✅ Input validasyonu
-- ✅ Overflow/underflow koruması
-- ✅ Reentrancy koruması
+- ✅ Secure transactions with post-conditions
+- ✅ Input validation
+- ✅ Overflow/underflow protection
+- ✅ Reentrancy protection
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-1. Fork yapın
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request açın
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push your branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 Lisans
+## 📄 License
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-## 🔗 Bağlantılar
+## 🔗 Links
 
 - [Stacks Documentation](https://docs.stacks.co)
 - [Clarity Language](https://docs.stacks.co/clarity)
 - [Hiro Wallet](https://wallet.hiro.so)
 - [Xverse Wallet](https://www.xverse.app)
 
-## 💡 Gelecek Özellikler
+## 💡 Future Features
 
-- [ ] Multiplayer mod
-- [ ] Turnuva sistemi
-- [ ] NFT ödülleri
-- [ ] Liderlik tablosu
-- [ ] Sosyal özellikler
-- [ ] Mobil uygulama
+- [ ] Multiplayer mode
+- [ ] Tournament system
+- [ ] NFT rewards
+- [ ] Leaderboard
+- [ ] Social features
+- [ ] Mobile app
 
-## ⚠️ Not
+## ⚠️ Note
 
-Bu proje eğitim amaçlı geliştirilmiştir. Mainnet'te kullanmadan önce kapsamlı testler yapın.
+This project was developed for educational purposes. Perform comprehensive testing before using on mainnet.
 
 ---
 
-**Geliştirici**: Stacks & Clarity Smart Contracts ile geliştirilmiştir
+**Developer**: Built with Stacks & Clarity Smart Contracts
 **Blockchain**: Stacks (Bitcoin Layer 2)
 **Framework**: Next.js + TypeScript + Tailwind CSS
