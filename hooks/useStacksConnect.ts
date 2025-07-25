@@ -104,7 +104,7 @@ export function useStacksConnect() {
         onFinish: (data) => {
           console.log('✅ SUCCESS!', data);
           setIsLoading(false);
-          setTimeout(() => fetchGameState(), 2000);
+          setTimeout(() => fetchGameState(), 5000);
         },
         onCancel: () => {
           console.log('❌ CANCELLED');
