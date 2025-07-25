@@ -9,25 +9,19 @@ import {
 } from '@stacks/connect';
 import {
   StacksTestnet,
-  StacksMainnet,
 } from '@stacks/network';
 import {
   AnchorMode,
   PostConditionMode,
-  stringAsciiCV,
   listCV,
   boolCV,
   principalCV,
   callReadOnlyFunction,
   cvToJSON,
-  makeStandardSTXPostCondition,
-  FungibleConditionCode,
 } from '@stacks/transactions';
 
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
-
-const DEMO_MODE = false;
 
 export interface GameState {
   predictions: boolean[];
@@ -46,15 +40,6 @@ export function useStacksConnect() {
   const contractAddress = 'STCJX4KMTAYFH35QN4YXYXNT78KHA5VMYYN3XDF3';
   const contractName = "basketball-game";
 
-  // Demo game state for testing
-  const [demoGameState, setDemoGameState] = useState<GameState>({
-    predictions: [],
-    shots: [],
-    completed: false,
-    predictionsMatched: false,
-    balance: 0,
-  });
-
   useEffect(() => {
     if (userSession.isSignInPending()) {
       userSession.handlePendingSignIn().then((userData) => {
@@ -68,7 +53,7 @@ export function useStacksConnect() {
   const connectWallet = () => {
     showConnect({
       appDetails: {
-        name: 'Basketball Free Throw Game',
+        name: 'Basketball Game',
         icon: '/favicon.svg',
       },
       redirectTo: '/',
@@ -83,49 +68,30 @@ export function useStacksConnect() {
     userSession.signUserOut('/');
     setUserData(null);
     setGameState(null);
-    setDemoGameState({
-      predictions: [],
-      shots: [],
-      completed: false,
-      predictionsMatched: false,
-      balance: 0,
-    });
   };
 
   const startGame = async (predictions: boolean[]) => {
-    if (!userData) return;
-
-    setIsLoading(true);
+    console.log('🎯 START GAME CALLED!', predictions);
     
-    if (DEMO_MODE) {
-      // Demo mode - simulate blockchain interaction
-      setTimeout(() => {
-        setDemoGameState({
-          predictions,
-          shots: [],
-          completed: false,
-          predictionsMatched: false,
-          balance: demoGameState.balance,
-        });
-        setGameState({
-          predictions,
-          shots: [],
-          completed: false,
-          predictionsMatched: false,
-          balance: demoGameState.balance,
-        });
-        setIsLoading(false);
-        console.log('Demo: Game started with predictions:', predictions);
-      }, 1000);
+    if (!userData) {
+      console.log('❌ No userData');
       return;
     }
+
+    if (predictions.length !== 3) {
+      console.log('❌ Invalid predictions length');
+      return;
+    }
+
+    setIsLoading(true);
+    console.log('🔄 Loading started');
 
     try {
       const functionArgs = [
         listCV(predictions.map(p => boolCV(p)))
       ];
 
-      const userAddress = userData.profile.stxAddress.testnet;
+      console.log('📤 Calling contract...');
 
       await openContractCall({
         network,
@@ -135,88 +101,42 @@ export function useStacksConnect() {
         functionName: 'start-game',
         functionArgs,
         postConditionMode: PostConditionMode.Allow,
-        postConditions: [
-          makeStandardSTXPostCondition(
-            userAddress,
-            FungibleConditionCode.LessEqual,
-            0n
-          )
-        ],
         onFinish: (data) => {
-          console.log('Game started:', data);
-          setTimeout(() => fetchGameState(), 3000); // Wait for transaction to be mined
+          console.log('✅ SUCCESS!', data);
+          setIsLoading(false);
+          setTimeout(() => fetchGameState(), 2000);
         },
         onCancel: () => {
-          console.log('Transaction cancelled');
+          console.log('❌ CANCELLED');
           setIsLoading(false);
         },
       });
     } catch (error) {
-      console.error('Error starting game:', error);
+      console.log('💥 ERROR:', error);
       setIsLoading(false);
     }
   };
 
   const takeShots = async (shots: boolean[]) => {
-    if (!userData) return;
-
-    setIsLoading(true);
+    if (!userData || shots.length !== 3) return;
     
-    if (DEMO_MODE) {
-      // Demo mode - simulate blockchain interaction
-      setTimeout(() => {
-        const predictionsMatch = JSON.stringify(demoGameState.predictions) === JSON.stringify(shots);
-        const newBalance = predictionsMatch ? demoGameState.balance + 1000000 : demoGameState.balance;
-        
-        const newGameState = {
-          predictions: demoGameState.predictions,
-          shots,
-          completed: true,
-          predictionsMatched: predictionsMatch,
-          balance: newBalance,
-        };
-        
-        setDemoGameState(newGameState);
-        setGameState(newGameState);
-        setIsLoading(false);
-        
-        if (predictionsMatch) {
-          console.log('Demo: Perfect predictions! You earned 1 STX token!');
-        } else {
-          console.log('Demo: Game completed, but predictions didn\'t match.');
-        }
-      }, 1000);
-      return;
-    }
+    setIsLoading(true);
 
     try {
-      const functionArgs = [
-        listCV(shots.map(s => boolCV(s)))
-      ];
-
-      const userAddress = userData.profile.stxAddress.testnet;
-
       await openContractCall({
         network,
         anchorMode: AnchorMode.Any,
         contractAddress,
         contractName,
         functionName: 'take-shots',
-        functionArgs,
-        postConditionMode: PostConditionMode.Deny,
-        postConditions: [
-          makeStandardSTXPostCondition(
-            userAddress,
-            FungibleConditionCode.LessEqual,
-            1000000n // Max 1 STX can be received
-          )
-        ],
+        functionArgs: [listCV(shots.map(s => boolCV(s)))],
+        postConditionMode: PostConditionMode.Allow,
         onFinish: (data) => {
           console.log('Shots taken:', data);
-          setTimeout(() => fetchGameState(), 3000); // Wait for transaction to be mined
+          setIsLoading(false);
+          setTimeout(() => fetchGameState(), 2000);
         },
         onCancel: () => {
-          console.log('Transaction cancelled');
           setIsLoading(false);
         },
       });
@@ -228,35 +148,10 @@ export function useStacksConnect() {
 
   const resetGame = async () => {
     if (!userData) return;
-
-    setIsLoading(true);
     
-    if (DEMO_MODE) {
-      // Demo mode - reset game state
-      setTimeout(() => {
-        setDemoGameState({
-          predictions: [],
-          shots: [],
-          completed: false,
-          predictionsMatched: false,
-          balance: demoGameState.balance,
-        });
-        setGameState({
-          predictions: [],
-          shots: [],
-          completed: false,
-          predictionsMatched: false,
-          balance: demoGameState.balance,
-        });
-        setIsLoading(false);
-        console.log('Demo: Game reset!');
-      }, 500);
-      return;
-    }
+    setIsLoading(true);
 
     try {
-      const userAddress = userData.profile.stxAddress.testnet;
-
       await openContractCall({
         network,
         anchorMode: AnchorMode.Any,
@@ -264,20 +159,13 @@ export function useStacksConnect() {
         contractName,
         functionName: 'reset-game',
         functionArgs: [],
-        postConditionMode: PostConditionMode.Deny,
-        postConditions: [
-          makeStandardSTXPostCondition(
-            userAddress,
-            FungibleConditionCode.LessEqual,
-            0n
-          )
-        ],
+        postConditionMode: PostConditionMode.Allow,
         onFinish: (data) => {
           console.log('Game reset:', data);
+          setIsLoading(false);
           setTimeout(() => fetchGameState(), 2000);
         },
         onCancel: () => {
-          console.log('Transaction cancelled');
           setIsLoading(false);
         },
       });
@@ -290,16 +178,9 @@ export function useStacksConnect() {
   const fetchGameState = async () => {
     if (!userData) return;
 
-    if (DEMO_MODE) {
-      // Demo mode - use local state
-      setGameState(demoGameState);
-      return;
-    }
-
     try {
       const userAddress = userData.profile.stxAddress.testnet;
 
-      // Get game data
       const gameResult = await callReadOnlyFunction({
         network,
         contractAddress,
@@ -309,7 +190,6 @@ export function useStacksConnect() {
         senderAddress: userAddress,
       });
 
-      // Get balance
       const balanceResult = await callReadOnlyFunction({
         network,
         contractAddress,
@@ -332,7 +212,6 @@ export function useStacksConnect() {
           balance: Number(balanceData.value) || 0,
         });
       } else {
-        // No game found, set empty state
         setGameState({
           predictions: [],
           shots: [],
@@ -343,26 +222,14 @@ export function useStacksConnect() {
       }
     } catch (error) {
       console.error('Error fetching game state:', error);
-      // Set default state on error
-      setGameState({
-        predictions: [],
-        shots: [],
-        completed: false,
-        predictionsMatched: false,
-        balance: 0,
-      });
     }
   };
 
   useEffect(() => {
     if (userData) {
-      if (DEMO_MODE) {
-        setGameState(demoGameState);
-      } else {
-        fetchGameState();
-      }
+      fetchGameState();
     }
-  }, [userData, demoGameState]);
+  }, [userData]);
 
   return {
     userData,
