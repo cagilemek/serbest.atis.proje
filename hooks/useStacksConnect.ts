@@ -25,8 +25,8 @@ import {
 const appConfig = new AppConfig(['store_write', 'publish_data']);
 const userSession = new UserSession({ appConfig });
 
-// Demo mode - set to false for real testnet deployment
 const DEMO_MODE = false;
+const contractAddress = "STCJX4KMTAYFH35QN4YXYXNT78KHA5VMYYN3XDF3.basketball-game";
 
 export interface GameState {
   predictions: boolean[];
