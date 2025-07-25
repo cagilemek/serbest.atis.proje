@@ -43,7 +43,7 @@ export function useStacksConnect() {
 
   const network = new StacksTestnet();
   const contractAddress = 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM';
-  const contractName = 'basketball-game';
+  const contractName = 'basketball_game';
 
   // Demo game state for testing
   const [demoGameState, setDemoGameState] = useState<GameState>({
