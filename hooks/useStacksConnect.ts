@@ -100,8 +100,18 @@ export function useStacksConnect() {
         postConditionMode: PostConditionMode.Allow,
         onFinish: (data) => {
           console.log('✅ SUCCESS!', data);
+          
+          // Direkt phase'i değiştir - gerçek tahminlerle
+          setGameState({
+            predictions: predictions, // Gerçek tahminler
+            shots: [],
+            completed: false,
+            predictionsMatched: false,
+            balance: 1000000,
+          });
+          
           setIsLoading(false);
-          setTimeout(() => fetchGameState(), 5000);
+          console.log('🎮 Game state updated with predictions:', predictions);
         },
         onCancel: () => {
           console.log('❌ CANCELLED');
@@ -129,9 +139,21 @@ export function useStacksConnect() {
         functionArgs: [listCV(shots.map(s => boolCV(s)))],
         postConditionMode: PostConditionMode.Allow,
         onFinish: (data) => {
-          console.log('Shots taken:', data);
+          console.log('✅ SHOTS SUCCESS!', data);
+          
+          // Oyunu tamamla
+          const predictionsMatch = JSON.stringify(gameState?.predictions) === JSON.stringify(shots);
+          
+          setGameState({
+            predictions: gameState?.predictions || [],
+            shots: shots,
+            completed: true,
+            predictionsMatched: predictionsMatch,
+            balance: predictionsMatch ? 2000000 : 1000000, // Bonus if match
+          });
+          
           setIsLoading(false);
-          setTimeout(() => fetchGameState(), 2000);
+          console.log('🏀 Shots completed:', shots);
         },
         onCancel: () => {
           setIsLoading(false);
@@ -158,9 +180,19 @@ export function useStacksConnect() {
         functionArgs: [],
         postConditionMode: PostConditionMode.Allow,
         onFinish: (data) => {
-          console.log('Game reset:', data);
+          console.log('✅ RESET SUCCESS!', data);
+          
+          // Oyunu sıfırla
+          setGameState({
+            predictions: [],
+            shots: [],
+            completed: false,
+            predictionsMatched: false,
+            balance: 1000000,
+          });
+          
           setIsLoading(false);
-          setTimeout(() => fetchGameState(), 2000);
+          console.log('🔄 Game reset completed');
         },
         onCancel: () => {
           setIsLoading(false);
